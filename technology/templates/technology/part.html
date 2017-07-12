@@ -1,0 +1,17 @@
+{% extends 'technology/base.html' %}
+{% load staticfiles %}
+{% block content %}
+    <div class="main-p">
+{% for blog in latest_blogs %}
+    	<article>
+    	    <div class="artimg"><a href="{% url 'technology:blog' blog.id %}"><img src="{{MEDIA_URL}}{{ blog.image.url }}" alt="jjj" ></a></div>
+    		<div class="artbody">
+    		<a href="{% url 'technology:blog' blog.id %}"><h3>{{blog.title}}</h3></a>
+    		<span>من طرف <a href="{%url 'technology:profile' blog.publisher.id%}">{{blog.publisher.get_full_name}}</a> في {{blog.date}}
+    		</span>
+    		<p>{{ blog.body|slice:":255" }}</p>
+    		</div>
+    	</article>
+{% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>التقنية</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	<link rel="icon" type="image/png"
+     href="{% static 'files/cpu.png' %}" />
+</head>
+
+<body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.9&appId=1015886131876010";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+    <header class="main-header">
+    <div class="head2">
+    	<a href="https://www.facebook.com/" class="sm"><img src="{% static 'files/facebook.svg' %}"></a>
+       	<a href="http://www.twitter.com" class="sm"><img src="{% static 'files/twitter.svg' %}"></a>
+    	<a href="http://www.youtube.com" class="sm"><img src="{% static 'files/youtube.svg' %}"></a>
+    	<a href="http://www.google-plus.com" class="sm"><img src="{% static 'files/google-plus.svg' %}"></a>
+    </div>
+    <div class="head1"><a href="{% url 'technology:index' %}"><img src="{% static 'files/logo6.png' %}"/></a></div></header>
+
+    <nav><ul>
+
+
+
+    	<li class="one two"><a href="{% url 'technology:index' %}" class="a">الرئيسية</a></li>
+        {% for part in parts %}
+        <li class="two"><a href="{% url 'technology:part' part.id %}" class="a" >{{part.name}}</a></li>
+        {% endfor %}
+
+    	<li class="two"><a class="a" id="list">المزيد ..</a>
+    	<div id="ddown">
+    	<a href="{% url 'technology:part' 4 %}">من نحن</a>
+    	<a href="{% url 'technology:part' 5 %}">إتصل بنا</a>
+    	</div></li>
+    </ul></nav>
+
+    <div class="number1">
+    {% block ind %}
+    {% endblock %}
+    </div>
+
+    <div class="container">
+    {% block content %}
+    {% endblock %}
+    <aside class="main-aside">
+    <p>الأكثر مشاهدة</p>
+    {% for b in best_blogs %}
+    <section>           
+    <div class="artimg"><a href="{% url 'technology:blog' b.id %}"><img src="{{MEDIA_URL}}{{ b.image.url }}" alt="jjj" ></a></div>
+    <div class="artbody">
+    <a href="{% url 'technology:blog' b.id %}"><p>{{b.title}}</p></a>
+    </div>
+    </section>
+    {% endfor %}
+    </aside>
+    </div>
+
+
+    <footer class="main-footer"><p>جميع الحقوق محفوظة 2017</p></footer>
+
+
+
+    <script type="text/javascript" src="{% static 'js/jquery-3.1.1.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
